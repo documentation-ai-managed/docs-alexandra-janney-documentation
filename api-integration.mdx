@@ -1,0 +1,88 @@
+---
+title: API Integration
+description: Learn how to integrate with Alexandra Janney Documentation APIs
+---
+
+## Authentication
+
+To use the Alexandra Janney Documentation APIs, you need to authenticate your requests using API keys.
+
+<Steps>
+  <Step title="Generate API Key" icon="key">
+    Go to your account settings and generate a new API key.
+  </Step>
+  <Step title="Include in Headers" icon="send">
+    Add the API key to your request headers as `Authorization: Bearer YOUR_API_KEY`.
+  </Step>
+  <Step title="Test Connection" icon="check-circle">
+    Make a test API call to verify your authentication is working.
+  </Step>
+</Steps>
+
+## Core Endpoints
+
+The API provides several core endpoints for managing your documentation:
+
+<Tabs>
+  <Tab title="Projects" icon="folder">
+    Manage documentation projects and their metadata.
+    
+    ```javascript
+    // Example: Create a new project
+    const response = await fetch('/api/projects', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer YOUR_API_KEY'
+      },
+      body: JSON.stringify({
+        name: 'My New Project',
+        description: 'A sample documentation project'
+      })
+    });
+    ```
+  </Tab>
+  <Tab title="Documents" icon="file-text">
+    Create, update, and retrieve individual documents.
+    
+    ```javascript
+    // Example: Fetch a document
+    const doc = await fetch('/api/documents/123', {
+      headers: {
+        'Authorization': 'Bearer YOUR_API_KEY'
+      }
+    });
+    ```
+  </Tab>
+  <Tab title="Users" icon="users">
+    Manage user accounts and permissions.
+  </Tab>
+</Tabs>
+
+<Callout kind="warning">Keep your API keys secure and never expose them in client-side code.</Callout>
+
+## Error Handling
+
+The API uses standard HTTP status codes to indicate the result of your requests. Here's how to handle common errors:
+
+<ExpandableGroup>
+  <Expandable title="401 Unauthorized" default-open="false">
+    Your API key is missing, invalid, or expired. Check your authentication headers.
+  </Expandable>
+  <Expandable title="403 Forbidden" default-open="false">
+    You don't have permission to access this resource. Verify your account permissions.
+  </Expandable>
+  <Expandable title="429 Too Many Requests" default-open="false">
+    You've exceeded the rate limit. Wait before making more requests.
+  </Expandable>
+</ExpandableGroup>
+
+## Rate Limits
+
+API requests are subject to rate limits to ensure fair usage:
+
+| Plan | Requests per hour | Requests per day |
+|------|-------------------|------------------|
+| Free | 100 | 1,000 |
+| Pro | 1,000 | 10,000 |
+| Enterprise | 10,000 | 100,000 |

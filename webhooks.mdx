@@ -1,0 +1,89 @@
+---
+title: Webhooks
+description: Set up webhooks to receive real-time notifications from Alexandra Janney Documentation
+---
+
+## Webhook Overview
+
+Webhooks allow you to receive real-time notifications when events occur in your documentation projects. This enables integration with other tools and automation workflows.
+
+<Steps>
+  <Step title="Create Webhook" icon="link">
+    Navigate to project settings and add a new webhook endpoint.
+  </Step>
+  <Step title="Select Events" icon="bell">
+    Choose which events you want to receive notifications for.
+  </Step>
+  <Step title="Configure Security" icon="shield">
+    Set up webhook signatures to verify incoming requests.
+  </Step>
+  <Step title="Test Integration" icon="check-circle">
+    Send a test event to verify your endpoint is working correctly.
+  </Step>
+</Steps>
+
+## Available Events
+
+You can subscribe to various events in your documentation projects:
+
+<Tabs>
+  <Tab title="Document Events" icon="file-text">
+    Notifications for document creation, updates, and deletions.
+  </Tab>
+  <Tab title="Project Events" icon="folder">
+    Alerts for project changes and team member updates.
+  </Tab>
+  <Tab title="User Events" icon="users">
+    Notifications about user account changes and permissions.
+  </Tab>
+</Tabs>
+
+<Callout kind="info">Webhook payloads include detailed information about the event that triggered them.</Callout>
+
+## Payload Structure
+
+All webhook payloads follow a consistent JSON structure:
+
+```json
+{
+  "event": "document.updated",
+  "timestamp": "2024-01-15T10:30:00Z",
+  "project": {
+    "id": "123",
+    "name": "My Project"
+  },
+  "data": {
+    "document_id": "456",
+    "changes": {
+      "title": "Updated Title",
+      "content": "New content here..."
+    }
+  }
+}
+```
+
+## Security Best Practices
+
+Secure your webhook endpoints to prevent unauthorized access:
+
+<ExpandableGroup>
+  <Expandable title="Verify Signatures" default-open="true">
+    Use HMAC signatures to verify that webhook requests come from Alexandra Janney Documentation.
+  </Expandable>
+  <Expandable title="Use HTTPS" default-open="false">
+    Always use HTTPS URLs for webhook endpoints to encrypt data in transit.
+  </Expandable>
+  <Expandable title="Validate Payloads" default-open="false">
+    Check that incoming payloads match expected schemas before processing.
+  </Expandable>
+</ExpandableGroup>
+
+## Troubleshooting
+
+Common webhook issues and their solutions:
+
+| Issue | Solution |
+|-------|----------|
+| Webhook not firing | Check that the event type is selected in webhook settings |
+| Signature verification fails | Ensure you're using the correct secret key |
+| Payload parsing errors | Validate the JSON structure of incoming requests |
